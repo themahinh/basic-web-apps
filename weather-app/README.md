@@ -10,8 +10,6 @@
   <a href="https://weather-app-nine-eta-90.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/Live%20Demo-Open%20App-3b82f6?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
   </a>
-  <img src="https://img.shields.io/badge/HTML%20%7C%20CSS%20%7C%20JavaScript-111827?style=for-the-badge" alt="Tech Stack" />
-  <img src="https://img.shields.io/badge/WeatherAPI-Live%20Weather%20Data-10b981?style=for-the-badge" alt="WeatherAPI" />
 </div>
 
 ---
@@ -46,15 +44,6 @@ It uses **WeatherAPI** to fetch live weather data, tries the user’s location f
 - CSS3
 - JavaScript
 - WeatherAPI
-
-## How to Run Locally
-
-```bash
-git clone https://github.com/your-username/weather-app.git
-cd weather-app
-```
-
-Then open `index.html` in your browser.
 
 ## Build Notes
 
