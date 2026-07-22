@@ -4,9 +4,9 @@ This repo documents my journey of learning web development by building small, pr
 
 ## Projects
 
-- [Weather App](./weather-app/) — A simple app that shows weather data using an API.
-- [Random Quotes Generator](./quotes-generator/) — Get random quotes from an API.
-- [To-Do List](./todo-app/) — A basic task manager with local storage.
+- [Weather App](./projects/weather-app/) — A simple app that shows weather data using an API.
+- [Random Quotes Generator](./projects/quotes-generator/) — Get random quotes from an API.
+- [To-Do List](./projects/todo-app/) — A basic task manager with local storage.
 - More projects coming soon.
 
 ## About
