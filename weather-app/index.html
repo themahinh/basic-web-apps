@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Weather — Glass</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Ambient animated background layers -->
+    <div class="bg-layer" id="bgLayer" aria-hidden="true">
+        <div class="bg-gradient"></div>
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <main class="app">
+
+        <!-- Search bar -->
+        <header class="search-bar glass">
+            <button class="icon-btn" id="locBtn" title="Use my location" aria-label="Use my location">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
+                </svg>
+            </button>
+
+            <div class="search-input-wrap">
+                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="cityInput" placeholder="Search for a city…" autocomplete="off"
+                    spellcheck="false" />
+            </div>
+
+            <button class="icon-btn" id="searchBtn" title="Search" aria-label="Search">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m5 12 7-7 7 7M12 5v14"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Toast for errors -->
+        <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+        <!-- Loading skeleton -->
+        <section class="card glass loading-card" id="loadingCard" hidden>
+            <div class="skeleton skel-city"></div>
+            <div class="skeleton skel-time"></div>
+            <div class="skeleton skel-temp"></div>
+            <div class="skeleton skel-cond"></div>
+            <div class="skel-grid">
+                <div class="skeleton skel-tile"></div>
+                <div class="skeleton skel-tile"></div>
+                <div class="skeleton skel-tile"></div>
+                <div class="skeleton skel-tile"></div>
+            </div>
+        </section>
+
+        <!-- Main weather card -->
+        <section class="card glass weather-card" id="weatherCard" hidden>
+
+            <div class="card-top">
+                <div class="location-block">
+                    <h1 class="city" id="cityName">—</h1>
+                    <p class="region" id="regionName">—</p>
+                    <p class="local-time" id="localTime">—</p>
+                </div>
+                <img class="cond-icon" id="condIcon" src="" alt="" width="72" height="72" />
+            </div>
+
+            <div class="temp-block">
+                <span class="temp" id="temp">—°</span>
+                <div class="temp-meta">
+                    <span class="condition" id="condText">—</span>
+                    <span class="feels-like" id="feelsLike">Feels like —°</span>
+                </div>
+            </div>
+
+            <div class="unit-toggle" role="group" aria-label="Temperature unit">
+                <button class="unit-btn active" id="unitC" data-unit="C">°C</button>
+                <button class="unit-btn" id="unitF" data-unit="F">°F</button>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-tile">
+                    <span class="detail-label">Humidity</span>
+                    <span class="detail-value" id="humidity">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">Wind</span>
+                    <span class="detail-value" id="wind">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">UV Index</span>
+                    <span class="detail-value" id="uv">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">Pressure</span>
+                    <span class="detail-value" id="pressure">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">Visibility</span>
+                    <span class="detail-value" id="visibility">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">Sunrise</span>
+                    <span class="detail-value" id="sunrise">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">Sunset</span>
+                    <span class="detail-value" id="sunset">—</span>
+                </div>
+                <div class="detail-tile">
+                    <span class="detail-label">Precipitation</span>
+                    <span class="detail-value" id="precip">—</span>
+                </div>
+            </div>
+
+            <p class="source-note">Weather data by WeatherAPI.com</p>
+        </section>
+
+        <!-- Error state (no data at all) -->
+        <section class="card glass error-card" id="errorCard" hidden>
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z">
+                </path>
+                <path d="M12 9v4M12 17h.01"></path>
+            </svg>
+            <h2>Couldn't load weather</h2>
+            <p id="errorMessage">Something went wrong. Please try searching for a city.</p>
+            <button class="retry-btn" id="retryBtn">Try Delhi instead</button>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
